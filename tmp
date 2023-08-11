@@ -1,0 +1,2264 @@
+linux_kernel_scan.pyc (Python 3.9)
+[Code]
+    File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 8
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'typing'
+        'Dict'
+        'Any'
+        'Tuple'
+        'List'
+        'Optional'
+        're'
+        'structlog'
+        ''
+        'statuscodes'
+        'katiska.version_king'
+        'Version'
+        'utils'
+        'FileEntry'
+        'read_lines_safe'
+        'resultstool'
+        'create_kernel_config_entry'
+        'katiska.custom_types'
+        'JsonDict'
+        'katiska.linux_kernel_config'
+        'KernelConfig'
+        'ConfigEnum'
+        'get_logger'
+        '__name__'
+        'logger'
+        'compile'
+        'ARCHITECTURE_VERSION_PATTERN'
+        'DEPENDENCY_PATTERN'
+        'DEPENDENCY_PATTERN2'
+        'LinuxKernelConfigScanner'
+        'str'
+        'get_configs'
+        'bool'
+        'has_valid_version'
+        'get_dependencies'
+        'check_dependencies'
+        'check_dependency_value'
+        'Exception'
+        'IllegalTokenError'
+        'NotParseable'
+        'int'
+        '_and_op'
+        '_or_op'
+        '_not_op'
+        'TOKENS'
+        '__annotations__'
+        '_get_tokens'
+        '_has_parentheses'
+        '_evaluate_nots'
+        '_evaluate_bool'
+        '_evaluate_nested_bool'
+        'evaluate_bool_str'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        (
+            'Dict'
+            'Any'
+            'Tuple'
+            'List'
+            'Optional'
+        )
+        None
+        2
+        (
+            'statuscodes'
+        )
+        (
+            'Version'
+        )
+        (
+            'FileEntry'
+            'read_lines_safe'
+        )
+        (
+            'create_kernel_config_entry'
+        )
+        (
+            'JsonDict'
+        )
+        (
+            'KernelConfig'
+            'ConfigEnum'
+        )
+        '((Linux/)([a-z0-9_]+) (\\d\\.\\d+\\.\\d+[a-z0-9-]*) (Kernel Configuration))'
+        'CONFIG_\\w+'
+        'CONFIG_\\w+[=]*\\w+'
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: LinuxKernelConfigScanner
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 5
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__doc__'
+                'FileEntry'
+                '__init__'
+                'int'
+                'parse_config_file'
+                'str'
+                'List'
+                'ConfigEnum'
+                'Dict'
+                'check_configs'
+                'find_interesting_configs'
+                'JsonDict'
+                'create_results_entry'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'LinuxKernelConfigScanner'
+                '\n    Linux kernel config option scanner which parses through the config file\n    and compares found config values against the ones stored in katiska.\n\n    The expected values are the values recommended by two sources (KSPP and CLIPOS).\n    The config values are compared agains the expected values, and differing values are\n    returned.\n    '
+                (
+                    'fileobj'
+                )
+                [Code]
+                    File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'fileobj'
+                        'thefile'
+                        'filename'
+                        'configs'
+                        'dependencies'
+                        'results'
+                        'version'
+                        'architecture'
+                    [Var Names]
+                        'self'
+                        'fileobj'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        ''
+                    [Disassembly]
+                        0       LOAD_FAST                     1: fileobj
+                        2       LOAD_FAST                     0: self
+                        4       STORE_ATTR                    0: fileobj
+                        6       LOAD_FAST                     1: fileobj
+                        8       LOAD_ATTR                     1: thefile
+                        10      LOAD_FAST                     0: self
+                        12      STORE_ATTR                    2: filename
+                        14      BUILD_LIST                    0
+                        16      LOAD_FAST                     0: self
+                        18      STORE_ATTR                    3: configs
+                        20      BUILD_MAP                     0
+                        22      LOAD_FAST                     0: self
+                        24      STORE_ATTR                    4: dependencies
+                        26      BUILD_MAP                     0
+                        28      LOAD_FAST                     0: self
+                        30      STORE_ATTR                    5: results
+                        32      LOAD_CONST                    1: ''
+                        34      LOAD_FAST                     0: self
+                        36      STORE_ATTR                    6: version
+                        38      LOAD_CONST                    1: ''
+                        40      LOAD_FAST                     0: self
+                        42      STORE_ATTR                    7: architecture
+                        44      LOAD_CONST                    0: None
+                        46      RETURN_VALUE                  
+                'LinuxKernelConfigScanner.__init__'
+                (
+                    'return'
+                )
+                [Code]
+                    File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+                    Object Name: parse_config_file
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'logger'
+                        'debug'
+                        'filename'
+                        'open'
+                        'ARCHITECTURE_VERSION_PATTERN'
+                        'search'
+                        'read'
+                        'groups'
+                        'architecture'
+                        'version'
+                        'Version'
+                        'get_configs'
+                        'list'
+                        'ConfigEnum'
+                        'configs'
+                        'get_dependencies'
+                        'dependencies'
+                        'warning'
+                        'statuscodes'
+                        'could_not_handle_file'
+                        'check_configs'
+                        'find_interesting_configs'
+                        'successfully_handled_file'
+                    [Var Names]
+                        'self'
+                        'fd'
+                        'architecture_version'
+                        '_'
+                        'version'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        '\n        Function to go through the config file and parse Kernel architecture, version and config options.\n\n        return: int status code, either success or could not handle.\n        '
+                        'Opening file'
+                        (
+                            'file'
+                        )
+                        'r'
+                        'ignore'
+                        (
+                            'errors'
+                        )
+                        119
+                        'Found Kernel architecture and version.'
+                        (
+                            'arch'
+                            'version'
+                        )
+                        (
+                            'configs'
+                            'version'
+                            'architecture'
+                        )
+                        'Unable to find Kernel architecture and version.'
+                        (
+                            'configs'
+                        )
+                        'Unable to retrieve Linux kernel configs'
+                        None
+                        (
+                            'filepath'
+                            'configs'
+                            'dependencies'
+                        )
+                        (
+                            'configs'
+                            'dependencies'
+                        )
+                    [Disassembly]
+                        0       LOAD_GLOBAL                   0: logger
+                        2       LOAD_ATTR                     1: debug
+                        4       LOAD_CONST                    1: 'Opening file'
+                        6       LOAD_FAST                     0: self
+                        8       LOAD_ATTR                     2: filename
+                        10      LOAD_CONST                    2: ('file',)
+                        12      CALL_FUNCTION_KW              2
+                        14      POP_TOP                       
+                        16      LOAD_GLOBAL                   3: NULL + debug
+                        18      LOAD_FAST                     0: self
+                        20      LOAD_ATTR                     2: filename
+                        22      LOAD_CONST                    3: 'r'
+                        24      LOAD_CONST                    4: 'ignore'
+                        26      LOAD_CONST                    5: ('errors',)
+                        28      CALL_FUNCTION_KW              3
+                        30      SETUP_WITH                    188
+                        32      STORE_FAST                    1: fd
+                        34      LOAD_GLOBAL                   4: filename
+                        36      LOAD_METHOD                   5: search
+                        38      LOAD_FAST                     1: fd
+                        40      LOAD_METHOD                   6: read
+                        42      LOAD_CONST                    6: 119
+                        44      CALL_METHOD                   1
+                        46      CALL_METHOD                   1
+                        48      STORE_FAST                    2: architecture_version
+                        50      LOAD_FAST                     2: architecture_version
+                        52      POP_JUMP_IF_FALSE             128
+                        54      LOAD_FAST                     2: architecture_version
+                        56      LOAD_METHOD                   7: groups
+                        58      CALL_METHOD                   0
+                        60      UNPACK_SEQUENCE               5
+                        62      STORE_FAST                    3: _
+                        64      STORE_FAST                    3: _
+                        66      LOAD_FAST                     0: self
+                        68      STORE_ATTR                    8: architecture
+                        70      LOAD_FAST                     0: self
+                        72      STORE_ATTR                    9: version
+                        74      STORE_FAST                    3: _
+                        76      LOAD_GLOBAL                   10: search
+                        78      LOAD_FAST                     0: self
+                        80      LOAD_ATTR                     9: version
+                        82      CALL_FUNCTION                 1
+                        84      STORE_FAST                    4: version
+                        86      LOAD_GLOBAL                   0: logger
+                        88      LOAD_ATTR                     1: debug
+                        90      LOAD_CONST                    7: 'Found Kernel architecture and version.'
+                        92      LOAD_FAST                     0: self
+                        94      LOAD_ATTR                     8: architecture
+                        96      LOAD_FAST                     4: version
+                        98      LOAD_CONST                    8: ('arch', 'version')
+                        100     CALL_FUNCTION_KW              3
+                        102     POP_TOP                       
+                        104     LOAD_GLOBAL                   11: NULL + search
+                        106     LOAD_GLOBAL                   12: read
+                        108     LOAD_GLOBAL                   13: NULL + read
+                        110     CALL_FUNCTION                 1
+                        112     LOAD_FAST                     4: version
+                        114     LOAD_FAST                     0: self
+                        116     LOAD_ATTR                     8: architecture
+                        118     LOAD_CONST                    9: ('configs', 'version', 'architecture')
+                        120     CALL_FUNCTION_KW              3
+                        122     LOAD_FAST                     0: self
+                        124     STORE_ATTR                    14: configs
+                        126     JUMP_FORWARD                  20 (to 148)
+                        128     LOAD_GLOBAL                   0: logger
+                        130     LOAD_METHOD                   1: debug
+                        132     LOAD_CONST                    10: 'Unable to find Kernel architecture and version.'
+                        134     CALL_METHOD                   1
+                        136     POP_TOP                       
+                        138     LOAD_GLOBAL                   12: read
+                        140     LOAD_GLOBAL                   13: NULL + read
+                        142     CALL_FUNCTION                 1
+                        144     LOAD_FAST                     0: self
+                        146     STORE_ATTR                    14: configs
+                        148     LOAD_FAST                     0: self
+                        150     LOAD_ATTR                     14: configs
+                        152     POP_JUMP_IF_FALSE             170
+                        154     LOAD_GLOBAL                   15: NULL + groups
+                        156     LOAD_FAST                     0: self
+                        158     LOAD_ATTR                     14: configs
+                        160     LOAD_CONST                    11: ('configs',)
+                        162     CALL_FUNCTION_KW              1
+                        164     LOAD_FAST                     0: self
+                        166     STORE_ATTR                    16: dependencies
+                        168     JUMP_FORWARD                  36 (to 206)
+                        170     LOAD_GLOBAL                   0: logger
+                        172     LOAD_ATTR                     17: warning
+                        174     LOAD_CONST                    12: 'Unable to retrieve Linux kernel configs'
+                        176     LOAD_FAST                     0: self
+                        178     LOAD_ATTR                     2: filename
+                        180     LOAD_CONST                    2: ('file',)
+                        182     CALL_FUNCTION_KW              2
+                        184     POP_TOP                       
+                        186     LOAD_GLOBAL                   18: version
+                        188     LOAD_ATTR                     19: could_not_handle_file
+                        190     POP_BLOCK                     
+                        192     ROT_TWO                       
+                        194     LOAD_CONST                    13: None
+                        196     DUP_TOP                       
+                        198     DUP_TOP                       
+                        200     CALL_FUNCTION                 3
+                        202     POP_TOP                       
+                        204     RETURN_VALUE                  
+                        206     POP_BLOCK                     
+                        208     LOAD_CONST                    13: None
+                        210     DUP_TOP                       
+                        212     DUP_TOP                       
+                        214     CALL_FUNCTION                 3
+                        216     POP_TOP                       
+                        218     JUMP_FORWARD                  16 (to 236)
+                        220     WITH_EXCEPT_START             
+                        222     POP_JUMP_IF_TRUE              226
+                        224     RERAISE                       
+                        226     POP_TOP                       
+                        228     POP_TOP                       
+                        230     POP_TOP                       
+                        232     POP_EXCEPT                    
+                        234     POP_TOP                       
+                        236     LOAD_FAST                     0: self
+                        238     LOAD_ATTR                     20: check_configs
+                        240     LOAD_FAST                     0: self
+                        242     LOAD_ATTR                     2: filename
+                        244     LOAD_FAST                     0: self
+                        246     LOAD_ATTR                     14: configs
+                        248     LOAD_FAST                     0: self
+                        250     LOAD_ATTR                     16: dependencies
+                        252     LOAD_CONST                    14: ('filepath', 'configs', 'dependencies')
+                        254     CALL_FUNCTION_KW              3
+                        256     POP_TOP                       
+                        258     LOAD_FAST                     0: self
+                        260     LOAD_ATTR                     21: find_interesting_configs
+                        262     LOAD_FAST                     0: self
+                        264     LOAD_ATTR                     14: configs
+                        266     LOAD_FAST                     0: self
+                        268     LOAD_ATTR                     16: dependencies
+                        270     LOAD_CONST                    15: ('configs', 'dependencies')
+                        272     CALL_FUNCTION_KW              2
+                        274     POP_TOP                       
+                        276     LOAD_GLOBAL                   18: version
+                        278     LOAD_ATTR                     22: successfully_handled_file
+                        280     RETURN_VALUE                  
+                'LinuxKernelConfigScanner.parse_config_file'
+                None
+                (
+                    'filepath'
+                    'configs'
+                    'dependencies'
+                    'return'
+                )
+                [Code]
+                    File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+                    Object Name: check_configs
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 9
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'logger'
+                        'debug'
+                        'filename'
+                        'read_lines_safe'
+                        'rstrip'
+                        'startswith'
+                        'split'
+                        'len'
+                        'strip'
+                        'ConfigEnum'
+                        'KeyError'
+                        'index'
+                        'value'
+                        'is_found'
+                        'found_value'
+                        'endswith'
+                    [Var Names]
+                        'self'
+                        'filepath'
+                        'configs'
+                        'dependencies'
+                        'line'
+                        'key_value'
+                        'config'
+                        'value'
+                        'config_enum'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        '\n        Extract config options and their dependency options from the config file and store their value.\n\n        examples of config lines:\n\n        CONFIG_INSTRUCTION_DECODER=y\n        CONFIG_OUTPUT_FORMAT="elf64-x86-64"\n        # CONFIG_COMPAT_BRK is not set\n\n        param file: Linux kernel config file to extract config options from.\n        param configs: List of ConfigEnums from katiska.\n        param dependencies: Dict of dependency config files built from ConfigEnums list.\n        '
+                        'Parsing through Linux kernel config file'
+                        (
+                            'file'
+                        )
+                        512
+                        (
+                            'limit'
+                        )
+                        '\n'
+                        'CONFIG_'
+                        '='
+                        1
+                        2
+                        'Malformed Linux kernel config option'
+                        (
+                            'line'
+                        )
+                        '"'
+                        'Found Linux kernel config'
+                        (
+                            'config'
+                        )
+                        True
+                        '# CONFIG_'
+                        ' is not set'
+                        ' '
+                        'n'
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                   0: logger
+                        2       LOAD_ATTR                     1: debug
+                        4       LOAD_CONST                    1: 'Parsing through Linux kernel config file'
+                        6       LOAD_FAST                     0: self
+                        8       LOAD_ATTR                     2: filename
+                        10      LOAD_CONST                    2: ('file',)
+                        12      CALL_FUNCTION_KW              2
+                        14      POP_TOP                       
+                        16      LOAD_GLOBAL                   3: NULL + debug
+                        18      LOAD_FAST                     1: filepath
+                        20      LOAD_CONST                    3: 512
+                        22      LOAD_CONST                    4: ('limit',)
+                        24      CALL_FUNCTION_KW              2
+                        26      GET_ITER                      
+                        28      FOR_ITER                      344 (to 376)
+                        32      STORE_FAST                    4: line
+                        34      LOAD_FAST                     4: line
+                        36      LOAD_METHOD                   4: rstrip
+                        38      LOAD_CONST                    5: '\n'
+                        40      CALL_METHOD                   1
+                        42      STORE_FAST                    4: line
+                        44      LOAD_FAST                     4: line
+                        46      LOAD_METHOD                   5: startswith
+                        48      LOAD_CONST                    6: 'CONFIG_'
+                        50      CALL_METHOD                   1
+                        52      POP_JUMP_IF_FALSE             224
+                        54      LOAD_FAST                     4: line
+                        56      LOAD_METHOD                   6: split
+                        58      LOAD_CONST                    7: '='
+                        60      LOAD_CONST                    8: 1
+                        62      CALL_METHOD                   2
+                        64      STORE_FAST                    5: key_value
+                        66      LOAD_GLOBAL                   7: NULL + read_lines_safe
+                        68      LOAD_FAST                     5: key_value
+                        70      CALL_FUNCTION                 1
+                        72      LOAD_CONST                    9: 2
+                        74      COMPARE_OP                    0 (<)
+                        76      POP_JUMP_IF_FALSE             94
+                        78      LOAD_GLOBAL                   0: logger
+                        80      LOAD_ATTR                     1: debug
+                        82      LOAD_CONST                    10: 'Malformed Linux kernel config option'
+                        84      LOAD_FAST                     4: line
+                        86      LOAD_CONST                    11: ('line',)
+                        88      CALL_FUNCTION_KW              2
+                        90      POP_TOP                       
+                        92      JUMP_ABSOLUTE                 28
+                        94      LOAD_FAST                     5: key_value
+                        96      UNPACK_SEQUENCE               2
+                        98      STORE_FAST                    6: config
+                        100     STORE_FAST                    7: value
+                        102     LOAD_FAST                     7: value
+                        104     LOAD_METHOD                   8: strip
+                        106     LOAD_CONST                    12: '"'
+                        108     CALL_METHOD                   1
+                        110     STORE_FAST                    7: value
+                        112     SETUP_FINALLY                 12 (to 126)
+                        114     LOAD_GLOBAL                   9: NULL + rstrip
+                        116     LOAD_FAST                     6: config
+                        118     BINARY_SUBSCR                 
+                        120     STORE_FAST                    8: config_enum
+                        122     POP_BLOCK                     
+                        124     JUMP_FORWARD                  22 (to 148)
+                        126     DUP_TOP                       
+                        128     LOAD_GLOBAL                   10: startswith
+                        130     JUMP_IF_NOT_EXC_MATCH         146
+                        132     POP_TOP                       
+                        134     POP_TOP                       
+                        136     POP_TOP                       
+                        138     POP_EXCEPT                    
+                        140     JUMP_ABSOLUTE                 28
+                        142     POP_EXCEPT                    
+                        144     JUMP_FORWARD                  2 (to 148)
+                        146     RERAISE                       
+                        148     LOAD_FAST                     8: config_enum
+                        150     LOAD_FAST                     2: configs
+                        152     CONTAINS_OP                   0 (in)
+                        154     POP_JUMP_IF_FALSE             206
+                        156     LOAD_GLOBAL                   0: logger
+                        158     LOAD_ATTR                     1: debug
+                        160     LOAD_CONST                    13: 'Found Linux kernel config'
+                        162     LOAD_FAST                     6: config
+                        164     LOAD_CONST                    14: ('config',)
+                        166     CALL_FUNCTION_KW              2
+                        168     POP_TOP                       
+                        170     LOAD_CONST                    15: True
+                        172     LOAD_FAST                     2: configs
+                        174     LOAD_FAST                     2: configs
+                        176     LOAD_METHOD                   11: index
+                        178     LOAD_FAST                     8: config_enum
+                        180     CALL_METHOD                   1
+                        182     BINARY_SUBSCR                 
+                        184     LOAD_ATTR                     12: value
+                        186     STORE_ATTR                    13: is_found
+                        188     LOAD_FAST                     7: value
+                        190     LOAD_FAST                     2: configs
+                        192     LOAD_FAST                     2: configs
+                        194     LOAD_METHOD                   11: index
+                        196     LOAD_FAST                     8: config_enum
+                        198     CALL_METHOD                   1
+                        200     BINARY_SUBSCR                 
+                        202     LOAD_ATTR                     12: value
+                        204     STORE_ATTR                    14: found_value
+                        206     LOAD_FAST                     6: config
+                        208     LOAD_FAST                     3: dependencies
+                        210     CONTAINS_OP                   0 (in)
+                        212     POP_JUMP_IF_FALSE             222
+                        214     LOAD_FAST                     7: value
+                        216     LOAD_FAST                     3: dependencies
+                        218     LOAD_FAST                     6: config
+                        220     STORE_SUBSCR                  
+                        222     JUMP_ABSOLUTE                 28
+                        224     LOAD_FAST                     4: line
+                        226     LOAD_METHOD                   5: startswith
+                        228     LOAD_CONST                    16: '# CONFIG_'
+                        230     CALL_METHOD                   1
+                        232     POP_JUMP_IF_FALSE             28
+                        234     LOAD_FAST                     4: line
+                        236     LOAD_METHOD                   15: endswith
+                        238     LOAD_CONST                    17: ' is not set'
+                        240     CALL_METHOD                   1
+                        242     POP_JUMP_IF_FALSE             360
+                        246     LOAD_FAST                     4: line
+                        248     LOAD_METHOD                   6: split
+                        250     LOAD_CONST                    18: ' '
+                        252     CALL_METHOD                   1
+                        254     LOAD_CONST                    8: 1
+                        256     BINARY_SUBSCR                 
+                        258     STORE_FAST                    6: config
+                        260     SETUP_FINALLY                 12 (to 274)
+                        262     LOAD_GLOBAL                   9: NULL + rstrip
+                        264     LOAD_FAST                     6: config
+                        266     BINARY_SUBSCR                 
+                        268     STORE_FAST                    8: config_enum
+                        270     POP_BLOCK                     
+                        272     JUMP_FORWARD                  24 (to 298)
+                        274     DUP_TOP                       
+                        276     LOAD_GLOBAL                   10: startswith
+                        278     JUMP_IF_NOT_EXC_MATCH         296
+                        282     POP_TOP                       
+                        284     POP_TOP                       
+                        286     POP_TOP                       
+                        288     POP_EXCEPT                    
+                        290     JUMP_ABSOLUTE                 28
+                        292     POP_EXCEPT                    
+                        294     JUMP_FORWARD                  2 (to 298)
+                        296     RERAISE                       
+                        298     LOAD_FAST                     8: config_enum
+                        300     LOAD_FAST                     2: configs
+                        302     CONTAINS_OP                   0 (in)
+                        304     POP_JUMP_IF_FALSE             374
+                        308     LOAD_GLOBAL                   0: logger
+                        310     LOAD_ATTR                     1: debug
+                        312     LOAD_CONST                    13: 'Found Linux kernel config'
+                        314     LOAD_FAST                     6: config
+                        316     LOAD_CONST                    14: ('config',)
+                        318     CALL_FUNCTION_KW              2
+                        320     POP_TOP                       
+                        322     LOAD_CONST                    15: True
+                        324     LOAD_FAST                     2: configs
+                        326     LOAD_FAST                     2: configs
+                        328     LOAD_METHOD                   11: index
+                        330     LOAD_FAST                     8: config_enum
+                        332     CALL_METHOD                   1
+                        334     BINARY_SUBSCR                 
+                        336     LOAD_ATTR                     12: value
+                        338     STORE_ATTR                    13: is_found
+                        340     LOAD_CONST                    19: 'n'
+                        342     LOAD_FAST                     2: configs
+                        344     LOAD_FAST                     2: configs
+                        346     LOAD_METHOD                   11: index
+                        348     LOAD_FAST                     8: config_enum
+                        350     CALL_METHOD                   1
+                        352     BINARY_SUBSCR                 
+                        354     LOAD_ATTR                     12: value
+                        356     STORE_ATTR                    14: found_value
+                        358     JUMP_ABSOLUTE                 28
+                        360     LOAD_GLOBAL                   0: logger
+                        362     LOAD_ATTR                     1: debug
+                        364     LOAD_CONST                    10: 'Malformed Linux kernel config option'
+                        366     LOAD_FAST                     4: line
+                        368     LOAD_CONST                    11: ('line',)
+                        370     CALL_FUNCTION_KW              2
+                        372     POP_TOP                       
+                        374     JUMP_ABSOLUTE                 28
+                        376     LOAD_CONST                    20: None
+                        378     RETURN_VALUE                  
+                'LinuxKernelConfigScanner.check_configs'
+                (
+                    'configs'
+                    'dependencies'
+                    'return'
+                )
+                [Code]
+                    File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+                    Object Name: find_interesting_configs
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'value'
+                        'is_found'
+                        'logger'
+                        'debug'
+                        'name'
+                        'results'
+                        'expected_value'
+                        'found_value'
+                    [Var Names]
+                        'self'
+                        'configs'
+                        'dependencies'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        '\n        Check that extracted config values match with expected values and find missing configs not included\n        in kernel config file. Store results in a Dict.\n\n        param configs: List of ConfigEnums with expected and found values for configs.\n        param dependencies: Dict of dependency config files and their extracted values.\n        '
+                        'Missing Linux kernel config'
+                        (
+                            'config'
+                        )
+                        None
+                        'Found Linux kernel config value does not match expected value'
+                        (
+                            'config'
+                            'expected'
+                            'found'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                     1: configs
+                        2       GET_ITER                      
+                        4       FOR_ITER                      110 (to 116)
+                        6       STORE_FAST                    3: config
+                        8       LOAD_FAST                     3: config
+                        10      LOAD_ATTR                     0: value
+                        12      LOAD_ATTR                     1: is_found
+                        14      POP_JUMP_IF_TRUE              50
+                        16      LOAD_GLOBAL                   2: is_found
+                        18      LOAD_ATTR                     3: debug
+                        20      LOAD_CONST                    1: 'Missing Linux kernel config'
+                        22      LOAD_FAST                     3: config
+                        24      LOAD_ATTR                     0: value
+                        26      LOAD_ATTR                     4: name
+                        28      LOAD_CONST                    2: ('config',)
+                        30      CALL_FUNCTION_KW              2
+                        32      POP_TOP                       
+                        34      LOAD_CONST                    3: None
+                        36      LOAD_FAST                     0: self
+                        38      LOAD_ATTR                     5: results
+                        40      LOAD_FAST                     3: config
+                        42      LOAD_ATTR                     0: value
+                        44      LOAD_ATTR                     4: name
+                        46      STORE_SUBSCR                  
+                        48      JUMP_ABSOLUTE                 4
+                        50      LOAD_FAST                     3: config
+                        52      LOAD_ATTR                     0: value
+                        54      LOAD_ATTR                     6: expected_value
+                        56      LOAD_FAST                     3: config
+                        58      LOAD_ATTR                     0: value
+                        60      LOAD_ATTR                     7: found_value
+                        62      COMPARE_OP                    3 (!=)
+                        64      POP_JUMP_IF_FALSE             4
+                        66      LOAD_GLOBAL                   2: is_found
+                        68      LOAD_ATTR                     3: debug
+                        70      LOAD_CONST                    4: 'Found Linux kernel config value does not match expected value'
+                        72      LOAD_FAST                     3: config
+                        74      LOAD_ATTR                     0: value
+                        76      LOAD_ATTR                     4: name
+                        78      LOAD_FAST                     3: config
+                        80      LOAD_ATTR                     0: value
+                        82      LOAD_ATTR                     6: expected_value
+                        84      LOAD_FAST                     3: config
+                        86      LOAD_ATTR                     0: value
+                        88      LOAD_ATTR                     7: found_value
+                        90      LOAD_CONST                    5: ('config', 'expected', 'found')
+                        92      CALL_FUNCTION_KW              4
+                        94      POP_TOP                       
+                        96      LOAD_FAST                     3: config
+                        98      LOAD_ATTR                     0: value
+                        100     LOAD_ATTR                     7: found_value
+                        102     LOAD_FAST                     0: self
+                        104     LOAD_ATTR                     5: results
+                        106     LOAD_FAST                     3: config
+                        108     LOAD_ATTR                     0: value
+                        110     LOAD_ATTR                     4: name
+                        112     STORE_SUBSCR                  
+                        114     JUMP_ABSOLUTE                 4
+                        116     LOAD_CONST                    3: None
+                        118     RETURN_VALUE                  
+                'LinuxKernelConfigScanner.find_interesting_configs'
+                [Code]
+                    File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+                    Object Name: create_results_entry
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'create_kernel_config_entry'
+                        'fileobj'
+                        'version'
+                        'architecture'
+                        'results'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        '\n        Create ConfigEntry based on FileEntry without libs and added version and config results dict.\n\n        return: ConfigEntry JsonDict\n        '
+                        (
+                            'fileobj'
+                            'version'
+                            'architecture'
+                            'configs'
+                        )
+                    [Disassembly]
+                        0       LOAD_GLOBAL                   0: create_kernel_config_entry
+                        2       LOAD_FAST                     0: self
+                        4       LOAD_ATTR                     1: fileobj
+                        6       LOAD_FAST                     0: self
+                        8       LOAD_ATTR                     2: version
+                        10      LOAD_FAST                     0: self
+                        12      LOAD_ATTR                     3: architecture
+                        14      LOAD_FAST                     0: self
+                        16      LOAD_ATTR                     4: results
+                        18      LOAD_CONST                    1: ('fileobj', 'version', 'architecture', 'configs')
+                        20      CALL_FUNCTION_KW              4
+                        22      RETURN_VALUE                  
+                'LinuxKernelConfigScanner.create_results_entry'
+            [Disassembly]
+                0       LOAD_NAME                     0: __name__
+                2       STORE_NAME                    1: __module__
+                4       LOAD_CONST                    0: 'LinuxKernelConfigScanner'
+                6       STORE_NAME                    2: __qualname__
+                8       LOAD_CONST                    1: '\n    Linux kernel config option scanner which parses through the config file\n    and compares found config values against the ones stored in katiska.\n\n    The expected values are the values recommended by two sources (KSPP and CLIPOS).\n    The config values are compared agains the expected values, and differing values are\n    returned.\n    '
+                10      STORE_NAME                    3: __doc__
+                12      LOAD_NAME                     4: FileEntry
+                14      LOAD_CONST                    2: ('fileobj',)
+                16      BUILD_CONST_KEY_MAP           1
+                18      LOAD_CONST                    3: <CODE> __init__
+                20      LOAD_CONST                    4: 'LinuxKernelConfigScanner.__init__'
+                22      MAKE_FUNCTION                 4
+                24      STORE_NAME                    5: __init__
+                26      LOAD_NAME                     6: int
+                28      LOAD_CONST                    5: ('return',)
+                30      BUILD_CONST_KEY_MAP           1
+                32      LOAD_CONST                    6: <CODE> parse_config_file
+                34      LOAD_CONST                    7: 'LinuxKernelConfigScanner.parse_config_file'
+                36      MAKE_FUNCTION                 4
+                38      STORE_NAME                    7: parse_config_file
+                40      LOAD_NAME                     8: str
+                42      LOAD_NAME                     9: List
+                44      LOAD_NAME                     10: ConfigEnum
+                46      BINARY_SUBSCR                 
+                48      LOAD_NAME                     11: Dict
+                50      LOAD_NAME                     8: str
+                52      LOAD_NAME                     8: str
+                54      BUILD_TUPLE                   2
+                56      BINARY_SUBSCR                 
+                58      LOAD_CONST                    8: None
+                60      LOAD_CONST                    9: ('filepath', 'configs', 'dependencies', 'return')
+                62      BUILD_CONST_KEY_MAP           4
+                64      LOAD_CONST                    10: <CODE> check_configs
+                66      LOAD_CONST                    11: 'LinuxKernelConfigScanner.check_configs'
+                68      MAKE_FUNCTION                 4
+                70      STORE_NAME                    12: check_configs
+                72      LOAD_NAME                     9: List
+                74      LOAD_NAME                     10: ConfigEnum
+                76      BINARY_SUBSCR                 
+                78      LOAD_NAME                     11: Dict
+                80      LOAD_NAME                     8: str
+                82      LOAD_NAME                     8: str
+                84      BUILD_TUPLE                   2
+                86      BINARY_SUBSCR                 
+                88      LOAD_CONST                    8: None
+                90      LOAD_CONST                    12: ('configs', 'dependencies', 'return')
+                92      BUILD_CONST_KEY_MAP           3
+                94      LOAD_CONST                    13: <CODE> find_interesting_configs
+                96      LOAD_CONST                    14: 'LinuxKernelConfigScanner.find_interesting_configs'
+                98      MAKE_FUNCTION                 4
+                100     STORE_NAME                    13: find_interesting_configs
+                102     LOAD_NAME                     14: JsonDict
+                104     LOAD_CONST                    5: ('return',)
+                106     BUILD_CONST_KEY_MAP           1
+                108     LOAD_CONST                    15: <CODE> create_results_entry
+                110     LOAD_CONST                    16: 'LinuxKernelConfigScanner.create_results_entry'
+                112     MAKE_FUNCTION                 4
+                114     STORE_NAME                    15: create_results_entry
+                116     LOAD_CONST                    8: None
+                118     RETURN_VALUE                  
+        'LinuxKernelConfigScanner'
+        (
+            'configs'
+            'version'
+            'architecture'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: get_configs
+            Arg Count: 3
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 5
+            Stack Size: 5
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'value'
+                'architecture'
+                'has_valid_version'
+                'append'
+            [Var Names]
+                'configs'
+                'version'
+                'architecture'
+                'results'
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Remove configs with incorrect architecture or version from a list of ConfigEnums\n\n    param configs: List of ConfigEnums from katiska.\n    param version: Kernel version extracted from kernel config file.\n    param architecture: Kernel architecture extracted from kernel config file.\n    return: List of version/architecture processed ConfigEnums\n    '
+                (
+                    'kernel_version'
+                    'config'
+                )
+            [Disassembly]
+                0       BUILD_LIST                    0
+                2       STORE_FAST                    3: results
+                4       LOAD_FAST                     0: configs
+                6       GET_ITER                      
+                8       FOR_ITER                      48 (to 58)
+                10      STORE_FAST                    4: config
+                12      LOAD_FAST                     4: config
+                14      LOAD_ATTR                     0: value
+                16      LOAD_ATTR                     1: architecture
+                18      POP_JUMP_IF_FALSE             32
+                20      LOAD_FAST                     2: architecture
+                22      LOAD_FAST                     4: config
+                24      LOAD_ATTR                     0: value
+                26      LOAD_ATTR                     1: architecture
+                28      CONTAINS_OP                   0 (in)
+                30      POP_JUMP_IF_FALSE             8
+                32      LOAD_GLOBAL                   2: architecture
+                34      LOAD_FAST                     1: version
+                36      LOAD_FAST                     4: config
+                38      LOAD_ATTR                     0: value
+                40      LOAD_CONST                    1: ('kernel_version', 'config')
+                42      CALL_FUNCTION_KW              2
+                44      POP_JUMP_IF_FALSE             8
+                46      LOAD_FAST                     3: results
+                48      LOAD_METHOD                   3: append
+                50      LOAD_FAST                     4: config
+                52      CALL_METHOD                   1
+                54      POP_TOP                       
+                56      JUMP_ABSOLUTE                 8
+                58      LOAD_FAST                     3: results
+                60      RETURN_VALUE                  
+        'get_configs'
+        (
+            'kernel_version'
+            'config'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: has_valid_version
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 3
+            Stack Size: 7
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'affected_version_ranges'
+                'is_within_range'
+            [Var Names]
+                'kernel_version'
+                'config'
+                'version'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Check if Config has correct version.\n\n    param kernel_version: Kernel version extracted from kernel config file.\n    param config: KernelConfig dataclass which contains info about the config option.\n    return: True if version is valid for config, else False.\n    '
+                0
+                1
+                None
+                (
+                    'start_including'
+                    'end_including'
+                    'start_excluding'
+                    'end_excluding'
+                )
+                True
+                False
+            [Disassembly]
+                0       LOAD_FAST                     1: config
+                2       LOAD_ATTR                     0: affected_version_ranges
+                4       GET_ITER                      
+                6       FOR_ITER                      36 (to 44)
+                8       STORE_FAST                    2: version
+                10      LOAD_FAST                     0: kernel_version
+                12      LOAD_ATTR                     1: is_within_range
+                14      LOAD_FAST                     2: version
+                16      LOAD_CONST                    1: 0
+                18      BINARY_SUBSCR                 
+                20      LOAD_FAST                     2: version
+                22      LOAD_CONST                    2: 1
+                24      BINARY_SUBSCR                 
+                26      LOAD_CONST                    3: None
+                28      LOAD_CONST                    3: None
+                30      LOAD_CONST                    4: ('start_including', 'end_including', 'start_excluding', 'end_excluding')
+                32      CALL_FUNCTION_KW              4
+                34      POP_JUMP_IF_FALSE             6
+                36      POP_TOP                       
+                38      LOAD_CONST                    5: True
+                40      RETURN_VALUE                  
+                42      JUMP_ABSOLUTE                 6
+                44      LOAD_CONST                    6: False
+                46      RETURN_VALUE                  
+        'has_valid_version'
+        (
+            'configs'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: get_dependencies
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 4
+            Stack Size: 5
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'value'
+                'depends'
+                'DEPENDENCY_PATTERN'
+                'findall'
+            [Var Names]
+                'configs'
+                'dependencies'
+                'config'
+                'dependency'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Parse dependency config options from List of ConfigEnums with regex and store them to a Dict.\n\n    param configs: List of ConfigEnums from katiska.\n    return: Dict with dependency config options names with default value False.\n    '
+                'False'
+            [Disassembly]
+                0       BUILD_MAP                     0
+                2       STORE_FAST                    1: dependencies
+                4       LOAD_FAST                     0: configs
+                6       GET_ITER                      
+                8       FOR_ITER                      40 (to 50)
+                10      STORE_FAST                    2: config
+                12      LOAD_FAST                     2: config
+                14      LOAD_ATTR                     0: value
+                16      LOAD_ATTR                     1: depends
+                18      POP_JUMP_IF_FALSE             8
+                20      LOAD_GLOBAL                   2: depends
+                22      LOAD_METHOD                   3: findall
+                24      LOAD_FAST                     2: config
+                26      LOAD_ATTR                     0: value
+                28      LOAD_ATTR                     1: depends
+                30      CALL_METHOD                   1
+                32      GET_ITER                      
+                34      FOR_ITER                      12 (to 48)
+                36      STORE_FAST                    3: dependency
+                38      LOAD_CONST                    1: 'False'
+                40      LOAD_FAST                     1: dependencies
+                42      LOAD_FAST                     3: dependency
+                44      STORE_SUBSCR                  
+                46      JUMP_ABSOLUTE                 34
+                48      JUMP_ABSOLUTE                 8
+                50      LOAD_FAST                     1: dependencies
+                52      RETURN_VALUE                  
+        'get_dependencies'
+        (
+            'config'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: check_dependencies
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 3
+            Stack Size: 5
+            Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+            [Names]
+                'depends'
+                'DEPENDENCY_PATTERN2'
+                'sub'
+                'evaluate_bool_str'
+            [Var Names]
+                'config'
+                'dependencies'
+                'dependency'
+            [Free Vars]
+            [Cell Vars]
+                'dependencies'
+            [Constants]
+                '\n    Evaluate config dependency boolean string to get a reason for missing config.\n\n    param config: KernelConfig dataclass containing the boolean string to be evaluated.\n    return: str reason on why config was not found\n    '
+                [Code]
+                    File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+                    Object Name: <lambda>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 6
+                    Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                    [Names]
+                        'check_dependency_value'
+                        'group'
+                        'split'
+                    [Var Names]
+                        'x'
+                    [Free Vars]
+                        'dependencies'
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        '='
+                    [Disassembly]
+                        0       LOAD_GLOBAL                   0: check_dependency_value
+                        2       LOAD_FAST                     0: x
+                        4       LOAD_METHOD                   1: group
+                        6       LOAD_CONST                    1: 0
+                        8       CALL_METHOD                   1
+                        10      LOAD_DEREF                    0: dependencies
+                        12      LOAD_FAST                     0: x
+                        14      LOAD_METHOD                   1: group
+                        16      LOAD_CONST                    1: 0
+                        18      CALL_METHOD                   1
+                        20      LOAD_METHOD                   2: split
+                        22      LOAD_CONST                    2: '='
+                        24      CALL_METHOD                   1
+                        26      LOAD_CONST                    1: 0
+                        28      BINARY_SUBSCR                 
+                        30      BINARY_SUBSCR                 
+                        32      CALL_FUNCTION                 2
+                        34      RETURN_VALUE                  
+                'check_dependencies.<locals>.<lambda>'
+                'Config option not available'
+                '('
+                ') does not equal true'
+                'Config option not found'
+                None
+            [Disassembly]
+                0       LOAD_FAST                     0: config
+                2       LOAD_ATTR                     0: depends
+                4       POP_JUMP_IF_FALSE             56
+                6       LOAD_GLOBAL                   1: NULL + depends
+                8       LOAD_METHOD                   2: sub
+                10      LOAD_CLOSURE                  0: dependencies
+                12      BUILD_TUPLE                   1
+                14      LOAD_CONST                    1: <CODE> <lambda>
+                16      LOAD_CONST                    2: 'check_dependencies.<locals>.<lambda>'
+                18      MAKE_FUNCTION                 8
+                20      LOAD_FAST                     0: config
+                22      LOAD_ATTR                     0: depends
+                24      CALL_METHOD                   2
+                26      STORE_FAST                    2: dependency
+                28      LOAD_GLOBAL                   3: NULL + DEPENDENCY_PATTERN2
+                30      LOAD_FAST                     2: dependency
+                32      CALL_FUNCTION                 1
+                34      POP_JUMP_IF_FALSE             40
+                36      LOAD_CONST                    3: 'Config option not available'
+                38      RETURN_VALUE                  
+                40      LOAD_CONST                    4: '('
+                42      LOAD_FAST                     0: config
+                44      LOAD_ATTR                     0: depends
+                46      FORMAT_VALUE                  0
+                48      LOAD_CONST                    5: ') does not equal true'
+                50      BUILD_STRING                  3
+                52      RETURN_VALUE                  
+                54      JUMP_FORWARD                  4 (to 60)
+                56      LOAD_CONST                    6: 'Config option not found'
+                58      RETURN_VALUE                  
+                60      LOAD_CONST                    7: None
+                62      RETURN_VALUE                  
+        'check_dependencies'
+        (
+            'dependency_regex'
+            'dependency_value'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: check_dependency_value
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 2
+            Stack Size: 3
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'split'
+            [Var Names]
+                'dependency_regex'
+                'dependency_value'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Helper function for evaluate_bool_str to give dependency options boolean values based on config option value.\n\n    param dependency_regex: Either ConfigOptionName or ConfigOptionName=Value\n    param dependency_value: Value extracted for the dependency config option from kernel config file.\n    return: boolean as a str if config option had the value we expected.\n    '
+                '='
+                1
+                'True'
+                'False'
+            [Disassembly]
+                0       LOAD_CONST                    1: '='
+                2       LOAD_FAST                     0: dependency_regex
+                4       CONTAINS_OP                   0 (in)
+                6       POP_JUMP_IF_FALSE             34
+                8       LOAD_FAST                     0: dependency_regex
+                10      LOAD_METHOD                   0: split
+                12      LOAD_CONST                    1: '='
+                14      CALL_METHOD                   1
+                16      LOAD_CONST                    2: 1
+                18      BINARY_SUBSCR                 
+                20      LOAD_FAST                     1: dependency_value
+                22      COMPARE_OP                    2 (==)
+                24      POP_JUMP_IF_FALSE             30
+                26      LOAD_CONST                    3: 'True'
+                28      RETURN_VALUE                  
+                30      LOAD_CONST                    4: 'False'
+                32      RETURN_VALUE                  
+                34      LOAD_FAST                     1: dependency_value
+                36      LOAD_CONST                    4: 'False'
+                38      COMPARE_OP                    3 (!=)
+                40      POP_JUMP_IF_FALSE             46
+                42      LOAD_CONST                    3: 'True'
+                44      RETURN_VALUE                  
+                46      LOAD_FAST                     1: dependency_value
+                48      RETURN_VALUE                  
+        'check_dependency_value'
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: IllegalTokenError
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 1
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'IllegalTokenError'
+                None
+            [Disassembly]
+                0       LOAD_NAME                     0: __name__
+                2       STORE_NAME                    1: __module__
+                4       LOAD_CONST                    0: 'IllegalTokenError'
+                6       STORE_NAME                    2: __qualname__
+                8       LOAD_CONST                    1: None
+                10      RETURN_VALUE                  
+        'IllegalTokenError'
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: NotParseable
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 1
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'NotParseable'
+                None
+            [Disassembly]
+                0       LOAD_NAME                     0: __name__
+                2       STORE_NAME                    1: __module__
+                4       LOAD_CONST                    0: 'NotParseable'
+                6       STORE_NAME                    2: __qualname__
+                8       LOAD_CONST                    1: None
+                10      RETURN_VALUE                  
+        'NotParseable'
+        (
+            'idx'
+            'left'
+            'tokens'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: _and_op
+            Arg Count: 3
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 3
+            Stack Size: 8
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'IndexError'
+                'NotParseable'
+            [Var Names]
+                'idx'
+                'left'
+                'tokens'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                1
+                'Boolean string does not end with a boolean value'
+            [Disassembly]
+                0       SETUP_FINALLY                 18 (to 20)
+                2       LOAD_FAST                     1: left
+                4       JUMP_IF_FALSE_OR_POP          16
+                6       LOAD_FAST                     2: tokens
+                8       LOAD_FAST                     0: idx
+                10      LOAD_CONST                    1: 1
+                12      BINARY_ADD                    
+                14      BINARY_SUBSCR                 
+                16      POP_BLOCK                     
+                18      RETURN_VALUE                  
+                20      DUP_TOP                       
+                22      LOAD_GLOBAL                   0: IndexError
+                24      JUMP_IF_NOT_EXC_MATCH         44
+                26      POP_TOP                       
+                28      POP_TOP                       
+                30      POP_TOP                       
+                32      LOAD_GLOBAL                   1: NULL + IndexError
+                34      LOAD_CONST                    2: 'Boolean string does not end with a boolean value'
+                36      CALL_FUNCTION                 1
+                38      RAISE_VARARGS                 1
+                40      POP_EXCEPT                    
+                42      JUMP_FORWARD                  2 (to 46)
+                44      RERAISE                       
+                46      LOAD_CONST                    0: None
+                48      RETURN_VALUE                  
+        '_and_op'
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: _or_op
+            Arg Count: 3
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 3
+            Stack Size: 8
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'IndexError'
+                'NotParseable'
+            [Var Names]
+                'idx'
+                'left'
+                'tokens'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                1
+                'Boolean string does not end with a boolean value'
+            [Disassembly]
+                0       SETUP_FINALLY                 18 (to 20)
+                2       LOAD_FAST                     1: left
+                4       JUMP_IF_TRUE_OR_POP           16
+                6       LOAD_FAST                     2: tokens
+                8       LOAD_FAST                     0: idx
+                10      LOAD_CONST                    1: 1
+                12      BINARY_ADD                    
+                14      BINARY_SUBSCR                 
+                16      POP_BLOCK                     
+                18      RETURN_VALUE                  
+                20      DUP_TOP                       
+                22      LOAD_GLOBAL                   0: IndexError
+                24      JUMP_IF_NOT_EXC_MATCH         44
+                26      POP_TOP                       
+                28      POP_TOP                       
+                30      POP_TOP                       
+                32      LOAD_GLOBAL                   1: NULL + IndexError
+                34      LOAD_CONST                    2: 'Boolean string does not end with a boolean value'
+                36      CALL_FUNCTION                 1
+                38      RAISE_VARARGS                 1
+                40      POP_EXCEPT                    
+                42      JUMP_FORWARD                  2 (to 46)
+                44      RERAISE                       
+                46      LOAD_CONST                    0: None
+                48      RETURN_VALUE                  
+        '_or_op'
+        (
+            'idx'
+            'tokens'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: _not_op
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 2
+            Stack Size: 8
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'IndexError'
+                'NotParseable'
+            [Var Names]
+                'idx'
+                'tokens'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                1
+                'Boolean string does not end with a boolean value'
+            [Disassembly]
+                0       SETUP_FINALLY                 16 (to 18)
+                2       LOAD_FAST                     1: tokens
+                4       LOAD_FAST                     0: idx
+                6       LOAD_CONST                    1: 1
+                8       BINARY_ADD                    
+                10      BINARY_SUBSCR                 
+                12      UNARY_NOT                     
+                14      POP_BLOCK                     
+                16      RETURN_VALUE                  
+                18      DUP_TOP                       
+                20      LOAD_GLOBAL                   0: IndexError
+                22      JUMP_IF_NOT_EXC_MATCH         42
+                24      POP_TOP                       
+                26      POP_TOP                       
+                28      POP_TOP                       
+                30      LOAD_GLOBAL                   1: NULL + IndexError
+                32      LOAD_CONST                    2: 'Boolean string does not end with a boolean value'
+                34      CALL_FUNCTION                 1
+                36      RAISE_VARARGS                 1
+                38      POP_EXCEPT                    
+                40      JUMP_FORWARD                  2 (to 44)
+                42      RERAISE                       
+                44      LOAD_CONST                    0: None
+                46      RETURN_VALUE                  
+        '_not_op'
+        True
+        False
+        '('
+        ')'
+        (
+            'True'
+            'False'
+            'and'
+            'or'
+            'not'
+            '('
+            ')'
+        )
+        'TOKENS'
+        (
+            'bool_str'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: _get_tokens
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 4
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'replace'
+                'split'
+            [Var Names]
+                'bool_str'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Break boolean str into tokens and change their type with TOKENS Dict.\n\n    param bool_str: Boolean str to be split into tokens.\n    return: List of tokens split from bool_str.\n    '
+                '('
+                '( '
+                ')'
+                ' )'
+                [Code]
+                    File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                    [Names]
+                        'TOKENS'
+                    [Var Names]
+                        '.0'
+                        'x'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                    [Disassembly]
+                        0       BUILD_LIST                    0
+                        2       LOAD_FAST                     0: .0
+                        4       FOR_ITER                      16 (to 22)
+                        6       STORE_FAST                    1: x
+                        8       LOAD_FAST                     1: x
+                        10      POP_JUMP_IF_FALSE             4
+                        12      LOAD_GLOBAL                   0: TOKENS
+                        14      LOAD_FAST                     1: x
+                        16      BINARY_SUBSCR                 
+                        18      LIST_APPEND                   2
+                        20      JUMP_ABSOLUTE                 4
+                        22      RETURN_VALUE                  
+                '_get_tokens.<locals>.<listcomp>'
+                ' '
+            [Disassembly]
+                0       LOAD_FAST                     0: bool_str
+                2       LOAD_METHOD                   0: replace
+                4       LOAD_CONST                    1: '('
+                6       LOAD_CONST                    2: '( '
+                8       CALL_METHOD                   2
+                10      LOAD_METHOD                   0: replace
+                12      LOAD_CONST                    3: ')'
+                14      LOAD_CONST                    4: ' )'
+                16      CALL_METHOD                   2
+                18      STORE_FAST                    0: bool_str
+                20      LOAD_CONST                    5: <CODE> <listcomp>
+                22      LOAD_CONST                    6: '_get_tokens.<locals>.<listcomp>'
+                24      MAKE_FUNCTION                 0
+                26      LOAD_FAST                     0: bool_str
+                28      LOAD_METHOD                   1: split
+                30      LOAD_CONST                    7: ' '
+                32      CALL_METHOD                   1
+                34      GET_ITER                      
+                36      CALL_FUNCTION                 1
+                38      RETURN_VALUE                  
+        '_get_tokens'
+        (
+            'tokens'
+            'return'
+        )
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: _has_parentheses
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 4
+            Stack Size: 4
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'enumerate'
+            [Var Names]
+                'tokens'
+                'open_bracket'
+                'idx'
+                'token'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Find if list of tokens contain parentheses and if it does find the position of first closing parenthesis and\n    its matching open parenthesis.\n\n    param tokens: List of boolean str tokens.\n    return: Tuple with bool for parenthesis found and their indices.\n    '
+                -1
+                '('
+                ')'
+                True
+                (
+                    False
+                    -1
+                    -1
+                )
+            [Disassembly]
+                0       LOAD_CONST                    1: -1
+                2       STORE_FAST                    1: open_bracket
+                4       LOAD_GLOBAL                   0: enumerate
+                6       LOAD_FAST                     0: tokens
+                8       CALL_FUNCTION                 1
+                10      GET_ITER                      
+                12      FOR_ITER                      44 (to 58)
+                14      UNPACK_SEQUENCE               2
+                16      STORE_FAST                    2: idx
+                18      STORE_FAST                    3: token
+                20      LOAD_FAST                     3: token
+                22      LOAD_CONST                    2: '('
+                24      COMPARE_OP                    2 (==)
+                26      POP_JUMP_IF_FALSE             34
+                28      LOAD_FAST                     2: idx
+                30      STORE_FAST                    1: open_bracket
+                32      JUMP_ABSOLUTE                 12
+                34      LOAD_FAST                     3: token
+                36      LOAD_CONST                    3: ')'
+                38      COMPARE_OP                    2 (==)
+                40      POP_JUMP_IF_FALSE             12
+                42      LOAD_CONST                    4: True
+                44      LOAD_FAST                     1: open_bracket
+                46      LOAD_FAST                     2: idx
+                48      BUILD_TUPLE                   3
+                50      ROT_TWO                       
+                52      POP_TOP                       
+                54      RETURN_VALUE                  
+                56      JUMP_ABSOLUTE                 12
+                58      LOAD_CONST                    5: (False, -1, -1)
+                60      RETURN_VALUE                  
+        '_has_parentheses'
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: _evaluate_nots
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 4
+            Stack Size: 6
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'enumerate'
+                'isinstance'
+                'bool'
+                '__name__'
+                '_not_op'
+            [Var Names]
+                'tokens'
+                'results'
+                'idx'
+                'token'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Evaluate all the boolean not operators in the list of tokens.\n\n    param tokens: List of boolean str tokens.\n    return: List of boolean str tokens with not operators evaluated.\n    '
+                2
+            [Disassembly]
+                0       LOAD_FAST                     0: tokens
+                2       STORE_FAST                    1: results
+                4       LOAD_GLOBAL                   0: enumerate
+                6       LOAD_FAST                     0: tokens
+                8       CALL_FUNCTION                 1
+                10      GET_ITER                      
+                12      FOR_ITER                      54 (to 68)
+                14      UNPACK_SEQUENCE               2
+                16      STORE_FAST                    2: idx
+                18      STORE_FAST                    3: token
+                20      LOAD_GLOBAL                   1: NULL + enumerate
+                22      LOAD_FAST                     3: token
+                24      LOAD_GLOBAL                   2: isinstance
+                26      CALL_FUNCTION                 2
+                28      POP_JUMP_IF_TRUE              12
+                30      LOAD_FAST                     3: token
+                32      LOAD_ATTR                     3: __name__
+                34      LOAD_GLOBAL                   4: bool
+                36      LOAD_ATTR                     3: __name__
+                38      COMPARE_OP                    2 (==)
+                40      POP_JUMP_IF_FALSE             12
+                42      LOAD_FAST                     3: token
+                44      LOAD_FAST                     2: idx
+                46      LOAD_FAST                     0: tokens
+                48      CALL_FUNCTION                 2
+                50      BUILD_LIST                    1
+                52      LOAD_FAST                     1: results
+                54      LOAD_FAST                     2: idx
+                56      LOAD_FAST                     2: idx
+                58      LOAD_CONST                    1: 2
+                60      BINARY_ADD                    
+                62      BUILD_SLICE                   2
+                64      STORE_SUBSCR                  
+                66      JUMP_ABSOLUTE                 12
+                68      LOAD_FAST                     1: results
+                70      RETURN_VALUE                  
+        '_evaluate_nots'
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: _evaluate_bool
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 4
+            Stack Size: 5
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                '_evaluate_nots'
+                'isinstance'
+                'bool'
+                'NotParseable'
+                'enumerate'
+            [Var Names]
+                'tokens'
+                'result'
+                'idx'
+                'token'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Evaluate the given list of boolean tokens.\n\n    param tokens: List of boolean str tokens.\n    return: Boolean value for the evaluated list\n    '
+                (
+                    'tokens'
+                )
+                0
+                'Boolean string does not begin with a boolean value'
+            [Disassembly]
+                0       LOAD_GLOBAL                   0: _evaluate_nots
+                2       LOAD_FAST                     0: tokens
+                4       LOAD_CONST                    1: ('tokens',)
+                6       CALL_FUNCTION_KW              1
+                8       STORE_FAST                    0: tokens
+                10      LOAD_FAST                     0: tokens
+                12      POP_JUMP_IF_FALSE             28
+                14      LOAD_GLOBAL                   1: NULL + _evaluate_nots
+                16      LOAD_FAST                     0: tokens
+                18      LOAD_CONST                    2: 0
+                20      BINARY_SUBSCR                 
+                22      LOAD_GLOBAL                   2: isinstance
+                24      CALL_FUNCTION                 2
+                26      POP_JUMP_IF_TRUE              36
+                28      LOAD_GLOBAL                   3: NULL + isinstance
+                30      LOAD_CONST                    3: 'Boolean string does not begin with a boolean value'
+                32      CALL_FUNCTION                 1
+                34      RAISE_VARARGS                 1
+                36      LOAD_FAST                     0: tokens
+                38      LOAD_CONST                    2: 0
+                40      BINARY_SUBSCR                 
+                42      STORE_FAST                    1: result
+                44      LOAD_GLOBAL                   4: bool
+                46      LOAD_FAST                     0: tokens
+                48      CALL_FUNCTION                 1
+                50      GET_ITER                      
+                52      FOR_ITER                      30 (to 84)
+                54      UNPACK_SEQUENCE               2
+                56      STORE_FAST                    2: idx
+                58      STORE_FAST                    3: token
+                60      LOAD_GLOBAL                   1: NULL + _evaluate_nots
+                62      LOAD_FAST                     3: token
+                64      LOAD_GLOBAL                   2: isinstance
+                66      CALL_FUNCTION                 2
+                68      POP_JUMP_IF_TRUE              52
+                70      LOAD_FAST                     3: token
+                72      LOAD_FAST                     2: idx
+                74      LOAD_FAST                     1: result
+                76      LOAD_FAST                     0: tokens
+                78      CALL_FUNCTION                 3
+                80      STORE_FAST                    1: result
+                82      JUMP_ABSOLUTE                 52
+                84      LOAD_FAST                     1: result
+                86      RETURN_VALUE                  
+        '_evaluate_bool'
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: _evaluate_nested_bool
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 4
+            Stack Size: 5
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                '_has_parentheses'
+                '_evaluate_bool'
+                '_evaluate_nested_bool'
+            [Var Names]
+                'tokens'
+                'has_paren'
+                'l'
+                'r'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    If list of tokens contain parentheses, recursively evaluate tokens inside them until no parentheses remain.\n    Else evaluate the whole list at once.\n\n    param tokens: List of boolean str tokens.\n    return: Boolean value for the evaluated list\n    '
+                (
+                    'tokens'
+                )
+                1
+            [Disassembly]
+                0       LOAD_GLOBAL                   0: _has_parentheses
+                2       LOAD_FAST                     0: tokens
+                4       LOAD_CONST                    1: ('tokens',)
+                6       CALL_FUNCTION_KW              1
+                8       UNPACK_SEQUENCE               3
+                10      STORE_FAST                    1: has_paren
+                12      STORE_FAST                    2: l
+                14      STORE_FAST                    3: r
+                16      LOAD_FAST                     1: has_paren
+                18      POP_JUMP_IF_FALSE             66
+                20      LOAD_GLOBAL                   1: NULL + _has_parentheses
+                22      LOAD_FAST                     0: tokens
+                24      LOAD_FAST                     2: l
+                26      LOAD_CONST                    2: 1
+                28      BINARY_ADD                    
+                30      LOAD_FAST                     3: r
+                32      BUILD_SLICE                   2
+                34      BINARY_SUBSCR                 
+                36      LOAD_CONST                    1: ('tokens',)
+                38      CALL_FUNCTION_KW              1
+                40      BUILD_LIST                    1
+                42      LOAD_FAST                     0: tokens
+                44      LOAD_FAST                     2: l
+                46      LOAD_FAST                     3: r
+                48      LOAD_CONST                    2: 1
+                50      BINARY_ADD                    
+                52      BUILD_SLICE                   2
+                54      STORE_SUBSCR                  
+                56      LOAD_GLOBAL                   2: _evaluate_bool
+                58      LOAD_FAST                     0: tokens
+                60      LOAD_CONST                    1: ('tokens',)
+                62      CALL_FUNCTION_KW              1
+                64      RETURN_VALUE                  
+                66      LOAD_GLOBAL                   1: NULL + _has_parentheses
+                68      LOAD_FAST                     0: tokens
+                70      LOAD_CONST                    1: ('tokens',)
+                72      CALL_FUNCTION_KW              1
+                74      RETURN_VALUE                  
+        '_evaluate_nested_bool'
+        120
+        5
+        [Code]
+            File Name: <findlib-2022.3.0>/findlib/sca/linux_kernel_scan.py
+            Object Name: evaluate_bool_str
+            Arg Count: 3
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 7
+            Stack Size: 10
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'NotParseable'
+                'len'
+                '_get_tokens'
+                'KeyError'
+                'IllegalTokenError'
+                'TOKENS'
+                'keys'
+                'isinstance'
+                'bool'
+                'count'
+                '_evaluate_nested_bool'
+            [Var Names]
+                'bool_str'
+                'max_length'
+                'max_recursion'
+                'tokens'
+                'e'
+                'l_paren'
+                'r_paren'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                '\n    Evaluates a boolean str by breaking it into tokens. Uses recursive functions to evaluate parenthesis.\n    Passes NotParseable and IllegalTokenError to the caller.\n\n    param bool_str: Boolean str to be evaluated.\n    param max_length: Max length of the boolean string allowed.\n    param max_recursion: Max recursion (read: number of parentheses) allowed.\n    return: Boolean value for the evaluated boolean str.\n    '
+                None
+                ''
+                'Boolean string cannot be empty or None'
+                'Boolean string exceeds the size limit of '
+                (
+                    'bool_str'
+                )
+                'Illegal token '
+                ', allowed tokens are '
+                1
+                0
+                'String does not contain boolean value'
+                '('
+                ')'
+                'Number of open parenthesis does not match number of close parenthesis'
+                'Number of parentheses exceeds the recursion limit of '
+                (
+                    'tokens'
+                )
+            [Disassembly]
+                0       LOAD_FAST                     0: bool_str
+                2       LOAD_CONST                    1: None
+                4       IS_OP                         0 (is)
+                6       POP_JUMP_IF_TRUE              16
+                8       LOAD_FAST                     0: bool_str
+                10      LOAD_CONST                    2: ''
+                12      COMPARE_OP                    2 (==)
+                14      POP_JUMP_IF_FALSE             24
+                16      LOAD_GLOBAL                   0: NotParseable
+                18      LOAD_CONST                    3: 'Boolean string cannot be empty or None'
+                20      CALL_FUNCTION                 1
+                22      RAISE_VARARGS                 1
+                24      LOAD_GLOBAL                   1: NULL + NotParseable
+                26      LOAD_FAST                     0: bool_str
+                28      CALL_FUNCTION                 1
+                30      LOAD_FAST                     1: max_length
+                32      COMPARE_OP                    4 (>)
+                34      POP_JUMP_IF_FALSE             50
+                36      LOAD_GLOBAL                   0: NotParseable
+                38      LOAD_CONST                    4: 'Boolean string exceeds the size limit of '
+                40      LOAD_FAST                     1: max_length
+                42      FORMAT_VALUE                  0
+                44      BUILD_STRING                  2
+                46      CALL_FUNCTION                 1
+                48      RAISE_VARARGS                 1
+                50      SETUP_FINALLY                 14 (to 66)
+                52      LOAD_GLOBAL                   2: len
+                54      LOAD_FAST                     0: bool_str
+                56      LOAD_CONST                    5: ('bool_str',)
+                58      CALL_FUNCTION_KW              1
+                60      STORE_FAST                    3: tokens
+                62      POP_BLOCK                     
+                64      JUMP_FORWARD                  60 (to 126)
+                66      DUP_TOP                       
+                68      LOAD_GLOBAL                   3: NULL + len
+                70      JUMP_IF_NOT_EXC_MATCH         124
+                72      POP_TOP                       
+                74      STORE_FAST                    4: e
+                76      POP_TOP                       
+                78      SETUP_FINALLY                 36 (to 116)
+                80      LOAD_GLOBAL                   4: _get_tokens
+                82      LOAD_CONST                    6: 'Illegal token '
+                84      LOAD_FAST                     4: e
+                86      FORMAT_VALUE                  0
+                88      LOAD_CONST                    7: ', allowed tokens are '
+                90      LOAD_GLOBAL                   5: NULL + _get_tokens
+                92      LOAD_METHOD                   6: keys
+                94      CALL_METHOD                   0
+                96      FORMAT_VALUE                  0
+                98      BUILD_STRING                  4
+                100     CALL_FUNCTION                 1
+                102     RAISE_VARARGS                 1
+                104     POP_BLOCK                     
+                106     POP_EXCEPT                    
+                108     LOAD_CONST                    1: None
+                110     STORE_FAST                    4: e
+                112     DELETE_FAST                   4: e
+                114     JUMP_FORWARD                  10 (to 126)
+                116     LOAD_CONST                    1: None
+                118     STORE_FAST                    4: e
+                120     DELETE_FAST                   4: e
+                122     RERAISE                       
+                124     RERAISE                       
+                126     LOAD_GLOBAL                   1: NULL + NotParseable
+                128     LOAD_FAST                     3: tokens
+                130     CALL_FUNCTION                 1
+                132     LOAD_CONST                    8: 1
+                134     COMPARE_OP                    2 (==)
+                136     POP_JUMP_IF_FALSE             168
+                138     LOAD_GLOBAL                   7: NULL + KeyError
+                140     LOAD_FAST                     3: tokens
+                142     LOAD_CONST                    9: 0
+                144     BINARY_SUBSCR                 
+                146     LOAD_GLOBAL                   8: IllegalTokenError
+                148     CALL_FUNCTION                 2
+                150     POP_JUMP_IF_FALSE             160
+                152     LOAD_FAST                     3: tokens
+                154     LOAD_CONST                    9: 0
+                156     BINARY_SUBSCR                 
+                158     RETURN_VALUE                  
+                160     LOAD_GLOBAL                   0: NotParseable
+                162     LOAD_CONST                    10: 'String does not contain boolean value'
+                164     CALL_FUNCTION                 1
+                166     RAISE_VARARGS                 1
+                168     LOAD_FAST                     3: tokens
+                170     LOAD_METHOD                   9: count
+                172     LOAD_CONST                    11: '('
+                174     CALL_METHOD                   1
+                176     STORE_FAST                    5: l_paren
+                178     LOAD_FAST                     3: tokens
+                180     LOAD_METHOD                   9: count
+                182     LOAD_CONST                    12: ')'
+                184     CALL_METHOD                   1
+                186     STORE_FAST                    6: r_paren
+                188     LOAD_FAST                     5: l_paren
+                190     LOAD_FAST                     6: r_paren
+                192     COMPARE_OP                    3 (!=)
+                194     POP_JUMP_IF_FALSE             204
+                196     LOAD_GLOBAL                   0: NotParseable
+                198     LOAD_CONST                    13: 'Number of open parenthesis does not match number of close parenthesis'
+                200     CALL_FUNCTION                 1
+                202     RAISE_VARARGS                 1
+                204     LOAD_FAST                     5: l_paren
+                206     LOAD_FAST                     2: max_recursion
+                208     COMPARE_OP                    4 (>)
+                210     POP_JUMP_IF_FALSE             226
+                212     LOAD_GLOBAL                   0: NotParseable
+                214     LOAD_CONST                    14: 'Number of parentheses exceeds the recursion limit of '
+                216     LOAD_FAST                     2: max_recursion
+                218     FORMAT_VALUE                  0
+                220     BUILD_STRING                  2
+                222     CALL_FUNCTION                 1
+                224     RAISE_VARARGS                 1
+                226     LOAD_GLOBAL                   10: TOKENS
+                228     LOAD_FAST                     3: tokens
+                230     LOAD_CONST                    15: ('tokens',)
+                232     CALL_FUNCTION_KW              1
+                234     RETURN_VALUE                  
+        'evaluate_bool_str'
+        (
+            120
+            5
+        )
+    [Disassembly]
+        0       SETUP_ANNOTATIONS             
+        2       LOAD_CONST                    0: 0
+        4       LOAD_CONST                    1: ('Dict', 'Any', 'Tuple', 'List', 'Optional')
+        6       IMPORT_NAME                   0: typing
+        8       IMPORT_FROM                   1: Dict
+        10      STORE_NAME                    1: Dict
+        12      IMPORT_FROM                   2: Any
+        14      STORE_NAME                    2: Any
+        16      IMPORT_FROM                   3: Tuple
+        18      STORE_NAME                    3: Tuple
+        20      IMPORT_FROM                   4: List
+        22      STORE_NAME                    4: List
+        24      IMPORT_FROM                   5: Optional
+        26      STORE_NAME                    5: Optional
+        28      POP_TOP                       
+        30      LOAD_CONST                    0: 0
+        32      LOAD_CONST                    2: None
+        34      IMPORT_NAME                   6: re
+        36      STORE_NAME                    6: re
+        38      LOAD_CONST                    0: 0
+        40      LOAD_CONST                    2: None
+        42      IMPORT_NAME                   7: structlog
+        44      STORE_NAME                    7: structlog
+        46      LOAD_CONST                    3: 2
+        48      LOAD_CONST                    4: ('statuscodes',)
+        50      IMPORT_NAME                   8: 
+        52      IMPORT_FROM                   9: statuscodes
+        54      STORE_NAME                    9: statuscodes
+        56      POP_TOP                       
+        58      LOAD_CONST                    0: 0
+        60      LOAD_CONST                    5: ('Version',)
+        62      IMPORT_NAME                   10: katiska.version_king
+        64      IMPORT_FROM                   11: Version
+        66      STORE_NAME                    11: Version
+        68      POP_TOP                       
+        70      LOAD_CONST                    3: 2
+        72      LOAD_CONST                    6: ('FileEntry', 'read_lines_safe')
+        74      IMPORT_NAME                   12: utils
+        76      IMPORT_FROM                   13: FileEntry
+        78      STORE_NAME                    13: FileEntry
+        80      IMPORT_FROM                   14: read_lines_safe
+        82      STORE_NAME                    14: read_lines_safe
+        84      POP_TOP                       
+        86      LOAD_CONST                    3: 2
+        88      LOAD_CONST                    7: ('create_kernel_config_entry',)
+        90      IMPORT_NAME                   15: resultstool
+        92      IMPORT_FROM                   16: create_kernel_config_entry
+        94      STORE_NAME                    16: create_kernel_config_entry
+        96      POP_TOP                       
+        98      LOAD_CONST                    0: 0
+        100     LOAD_CONST                    8: ('JsonDict',)
+        102     IMPORT_NAME                   17: katiska.custom_types
+        104     IMPORT_FROM                   18: JsonDict
+        106     STORE_NAME                    18: JsonDict
+        108     POP_TOP                       
+        110     LOAD_CONST                    0: 0
+        112     LOAD_CONST                    9: ('KernelConfig', 'ConfigEnum')
+        114     IMPORT_NAME                   19: katiska.linux_kernel_config
+        116     IMPORT_FROM                   20: KernelConfig
+        118     STORE_NAME                    20: KernelConfig
+        120     IMPORT_FROM                   21: ConfigEnum
+        122     STORE_NAME                    21: ConfigEnum
+        124     POP_TOP                       
+        126     LOAD_NAME                     7: structlog
+        128     LOAD_METHOD                   22: get_logger
+        130     LOAD_NAME                     23: __name__
+        132     CALL_METHOD                   1
+        134     STORE_NAME                    24: logger
+        136     LOAD_NAME                     6: re
+        138     LOAD_METHOD                   25: compile
+        140     LOAD_CONST                    10: '((Linux/)([a-z0-9_]+) (\\d\\.\\d+\\.\\d+[a-z0-9-]*) (Kernel Configuration))'
+        142     CALL_METHOD                   1
+        144     STORE_NAME                    26: ARCHITECTURE_VERSION_PATTERN
+        146     LOAD_NAME                     6: re
+        148     LOAD_METHOD                   25: compile
+        150     LOAD_CONST                    11: 'CONFIG_\\w+'
+        152     CALL_METHOD                   1
+        154     STORE_NAME                    27: DEPENDENCY_PATTERN
+        156     LOAD_NAME                     6: re
+        158     LOAD_METHOD                   25: compile
+        160     LOAD_CONST                    12: 'CONFIG_\\w+[=]*\\w+'
+        162     CALL_METHOD                   1
+        164     STORE_NAME                    28: DEPENDENCY_PATTERN2
+        166     LOAD_BUILD_CLASS              
+        168     LOAD_CONST                    13: <CODE> LinuxKernelConfigScanner
+        170     LOAD_CONST                    14: 'LinuxKernelConfigScanner'
+        172     MAKE_FUNCTION                 0
+        174     LOAD_CONST                    14: 'LinuxKernelConfigScanner'
+        176     CALL_FUNCTION                 2
+        178     STORE_NAME                    29: LinuxKernelConfigScanner
+        180     LOAD_NAME                     4: List
+        182     LOAD_NAME                     21: ConfigEnum
+        184     BINARY_SUBSCR                 
+        186     LOAD_NAME                     11: Version
+        188     LOAD_NAME                     30: str
+        190     LOAD_NAME                     4: List
+        192     LOAD_NAME                     21: ConfigEnum
+        194     BINARY_SUBSCR                 
+        196     LOAD_CONST                    15: ('configs', 'version', 'architecture', 'return')
+        198     BUILD_CONST_KEY_MAP           4
+        200     LOAD_CONST                    16: <CODE> get_configs
+        202     LOAD_CONST                    17: 'get_configs'
+        204     MAKE_FUNCTION                 4
+        206     STORE_NAME                    31: get_configs
+        208     LOAD_NAME                     11: Version
+        210     LOAD_NAME                     20: KernelConfig
+        212     LOAD_NAME                     32: bool
+        214     LOAD_CONST                    18: ('kernel_version', 'config', 'return')
+        216     BUILD_CONST_KEY_MAP           3
+        218     LOAD_CONST                    19: <CODE> has_valid_version
+        220     LOAD_CONST                    20: 'has_valid_version'
+        222     MAKE_FUNCTION                 4
+        224     STORE_NAME                    33: has_valid_version
+        226     LOAD_NAME                     4: List
+        228     LOAD_NAME                     21: ConfigEnum
+        230     BINARY_SUBSCR                 
+        232     LOAD_NAME                     1: Dict
+        234     LOAD_NAME                     30: str
+        236     LOAD_NAME                     30: str
+        238     BUILD_TUPLE                   2
+        240     BINARY_SUBSCR                 
+        242     LOAD_CONST                    21: ('configs', 'return')
+        244     BUILD_CONST_KEY_MAP           2
+        246     LOAD_CONST                    22: <CODE> get_dependencies
+        248     LOAD_CONST                    23: 'get_dependencies'
+        250     MAKE_FUNCTION                 4
+        252     STORE_NAME                    34: get_dependencies
+        254     LOAD_NAME                     20: KernelConfig
+        256     LOAD_NAME                     30: str
+        258     LOAD_CONST                    24: ('config', 'return')
+        260     BUILD_CONST_KEY_MAP           2
+        262     LOAD_CONST                    25: <CODE> check_dependencies
+        264     LOAD_CONST                    26: 'check_dependencies'
+        266     MAKE_FUNCTION                 4
+        268     STORE_NAME                    35: check_dependencies
+        270     LOAD_NAME                     30: str
+        272     LOAD_NAME                     30: str
+        274     LOAD_NAME                     30: str
+        276     LOAD_CONST                    27: ('dependency_regex', 'dependency_value', 'return')
+        278     BUILD_CONST_KEY_MAP           3
+        280     LOAD_CONST                    28: <CODE> check_dependency_value
+        282     LOAD_CONST                    29: 'check_dependency_value'
+        284     MAKE_FUNCTION                 4
+        286     STORE_NAME                    36: check_dependency_value
+        288     LOAD_BUILD_CLASS              
+        290     LOAD_CONST                    30: <CODE> IllegalTokenError
+        292     LOAD_CONST                    31: 'IllegalTokenError'
+        294     MAKE_FUNCTION                 0
+        296     LOAD_CONST                    31: 'IllegalTokenError'
+        298     LOAD_NAME                     37: Exception
+        300     CALL_FUNCTION                 3
+        302     STORE_NAME                    38: IllegalTokenError
+        304     LOAD_BUILD_CLASS              
+        306     LOAD_CONST                    32: <CODE> NotParseable
+        308     LOAD_CONST                    33: 'NotParseable'
+        310     MAKE_FUNCTION                 0
+        312     LOAD_CONST                    33: 'NotParseable'
+        314     LOAD_NAME                     37: Exception
+        316     CALL_FUNCTION                 3
+        318     STORE_NAME                    39: NotParseable
+        320     LOAD_NAME                     40: int
+        322     LOAD_NAME                     32: bool
+        324     LOAD_NAME                     4: List
+        326     LOAD_NAME                     2: Any
+        328     BINARY_SUBSCR                 
+        330     LOAD_NAME                     32: bool
+        332     LOAD_CONST                    34: ('idx', 'left', 'tokens', 'return')
+        334     BUILD_CONST_KEY_MAP           4
+        336     LOAD_CONST                    35: <CODE> _and_op
+        338     LOAD_CONST                    36: '_and_op'
+        340     MAKE_FUNCTION                 4
+        342     STORE_NAME                    41: _and_op
+        344     LOAD_NAME                     40: int
+        346     LOAD_NAME                     32: bool
+        348     LOAD_NAME                     4: List
+        350     LOAD_NAME                     2: Any
+        352     BINARY_SUBSCR                 
+        354     LOAD_NAME                     32: bool
+        356     LOAD_CONST                    34: ('idx', 'left', 'tokens', 'return')
+        358     BUILD_CONST_KEY_MAP           4
+        360     LOAD_CONST                    37: <CODE> _or_op
+        362     LOAD_CONST                    38: '_or_op'
+        364     MAKE_FUNCTION                 4
+        366     STORE_NAME                    42: _or_op
+        368     LOAD_NAME                     40: int
+        370     LOAD_NAME                     4: List
+        372     LOAD_NAME                     2: Any
+        374     BINARY_SUBSCR                 
+        376     LOAD_NAME                     32: bool
+        378     LOAD_CONST                    39: ('idx', 'tokens', 'return')
+        380     BUILD_CONST_KEY_MAP           3
+        382     LOAD_CONST                    40: <CODE> _not_op
+        384     LOAD_CONST                    41: '_not_op'
+        386     MAKE_FUNCTION                 4
+        388     STORE_NAME                    43: _not_op
+        390     LOAD_CONST                    42: True
+        392     LOAD_CONST                    43: False
+        394     LOAD_NAME                     41: _and_op
+        396     LOAD_NAME                     42: _or_op
+        398     LOAD_NAME                     43: _not_op
+        400     LOAD_CONST                    44: '('
+        402     LOAD_CONST                    45: ')'
+        404     LOAD_CONST                    46: ('True', 'False', 'and', 'or', 'not', '(', ')')
+        406     BUILD_CONST_KEY_MAP           7
+        408     STORE_NAME                    44: TOKENS
+        410     LOAD_NAME                     1: Dict
+        412     LOAD_NAME                     30: str
+        414     LOAD_NAME                     2: Any
+        416     BUILD_TUPLE                   2
+        418     BINARY_SUBSCR                 
+        420     LOAD_NAME                     45: __annotations__
+        422     LOAD_CONST                    47: 'TOKENS'
+        424     STORE_SUBSCR                  
+        426     LOAD_NAME                     30: str
+        428     LOAD_NAME                     4: List
+        430     LOAD_NAME                     2: Any
+        432     BINARY_SUBSCR                 
+        434     LOAD_CONST                    48: ('bool_str', 'return')
+        436     BUILD_CONST_KEY_MAP           2
+        438     LOAD_CONST                    49: <CODE> _get_tokens
+        440     LOAD_CONST                    50: '_get_tokens'
+        442     MAKE_FUNCTION                 4
+        444     STORE_NAME                    46: _get_tokens
+        446     LOAD_NAME                     4: List
+        448     LOAD_NAME                     2: Any
+        450     BINARY_SUBSCR                 
+        452     LOAD_NAME                     3: Tuple
+        454     LOAD_NAME                     32: bool
+        456     LOAD_NAME                     40: int
+        458     LOAD_NAME                     40: int
+        460     BUILD_TUPLE                   3
+        462     BINARY_SUBSCR                 
+        464     LOAD_CONST                    51: ('tokens', 'return')
+        466     BUILD_CONST_KEY_MAP           2
+        468     LOAD_CONST                    52: <CODE> _has_parentheses
+        470     LOAD_CONST                    53: '_has_parentheses'
+        472     MAKE_FUNCTION                 4
+        474     STORE_NAME                    47: _has_parentheses
+        476     LOAD_NAME                     4: List
+        478     LOAD_NAME                     2: Any
+        480     BINARY_SUBSCR                 
+        482     LOAD_NAME                     4: List
+        484     LOAD_NAME                     2: Any
+        486     BINARY_SUBSCR                 
+        488     LOAD_CONST                    51: ('tokens', 'return')
+        490     BUILD_CONST_KEY_MAP           2
+        492     LOAD_CONST                    54: <CODE> _evaluate_nots
+        494     LOAD_CONST                    55: '_evaluate_nots'
+        496     MAKE_FUNCTION                 4
+        498     STORE_NAME                    48: _evaluate_nots
+        500     LOAD_NAME                     4: List
+        502     LOAD_NAME                     2: Any
+        504     BINARY_SUBSCR                 
+        506     LOAD_NAME                     32: bool
+        508     LOAD_CONST                    51: ('tokens', 'return')
+        510     BUILD_CONST_KEY_MAP           2
+        512     LOAD_CONST                    56: <CODE> _evaluate_bool
+        514     LOAD_CONST                    57: '_evaluate_bool'
+        516     MAKE_FUNCTION                 4
+        518     STORE_NAME                    49: _evaluate_bool
+        520     LOAD_NAME                     4: List
+        522     LOAD_NAME                     2: Any
+        524     BINARY_SUBSCR                 
+        526     LOAD_NAME                     32: bool
+        528     LOAD_CONST                    51: ('tokens', 'return')
+        530     BUILD_CONST_KEY_MAP           2
+        532     LOAD_CONST                    58: <CODE> _evaluate_nested_bool
+        534     LOAD_CONST                    59: '_evaluate_nested_bool'
+        536     MAKE_FUNCTION                 4
+        538     STORE_NAME                    50: _evaluate_nested_bool
+        540     LOAD_CONST                    64: (120, 5)
+        542     LOAD_NAME                     30: str
+        544     LOAD_NAME                     32: bool
+        546     LOAD_CONST                    48: ('bool_str', 'return')
+        548     BUILD_CONST_KEY_MAP           2
+        550     LOAD_CONST                    62: <CODE> evaluate_bool_str
+        552     LOAD_CONST                    63: 'evaluate_bool_str'
+        554     MAKE_FUNCTION                 5
+        556     STORE_NAME                    51: evaluate_bool_str
+        558     LOAD_CONST                    2: None
+        560     RETURN_VALUE                  
